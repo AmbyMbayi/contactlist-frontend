@@ -1,16 +1,11 @@
 import React, { useEffect } from "react";
+import RegisterUI from "../../layout/Register";
 import { Link } from "react-router-dom";
-import { register } from "../../context/actions/register";
+import useForm from "./useForm";
+
 const RegisterContainer = () => {
-  useEffect(() => {
-    register();
-  }, []);
-  return (
-    <div>
-      <h1>Register</h1>
-      <Link to="/auth/login">Login</Link>
-    </div>
-  );
+  useEffect(() => {}, []);
+  return <RegisterUI form={useForm()} />;
 };
 
 export default RegisterContainer;
