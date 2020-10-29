@@ -1,4 +1,4 @@
-import axiosInstance from "../../../helpers/axios";
+import axiosInstance from "../../../helpers/axiosInstance";
 import {
   LOGIN_LOADING,
   LOGIN_SUCCESS,
@@ -10,7 +10,7 @@ export const login = ({ username, password }) => (dispatch) => {
     type: LOGIN_LOADING,
   });
 
-  axiosInstance
+  axiosInstance()
     .post("/auth/login", {
       username,
       password,
