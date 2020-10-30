@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Menu, Image, Button, Icon } from "semantic-ui-react";
 import logo from "../../assets/images/logo.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import logout from "../../context/actions/auth/logout";
+import { GlobalContext } from "../../context/Provider";
 
 const Header = () => {
   const { pathname } = useLocation();
+  const history = useHistory();
+  const { contactsDispatch: dispatch } = useContext(GlobalContext);
+
+  const handleUserLogout = () => {
+    logout(history)(dispatch);
+  };
 
   return (
     <div>
@@ -24,7 +32,7 @@ const Header = () => {
         )}
         {pathname == "/" && (
           <Menu.Item>
-            <Button color="red" basic icon>
+            <Button onClick={handleUserLogout} color="red" basic icon>
               <Icon name="log out"></Icon>
               Logout
             </Button>
