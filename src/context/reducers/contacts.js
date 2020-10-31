@@ -35,12 +35,12 @@ const contacts = (state, { payload, type }) => {
         },
       };
 
-    case LOGOUT_USER: {
+    case LOGOUT_USER:
       return {
         ...state,
         contactsInitialState,
       };
-    }
+
     default:
       return state;
   }

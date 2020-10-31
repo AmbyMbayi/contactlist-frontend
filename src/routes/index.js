@@ -17,16 +17,16 @@ const routes = [
     needsAuth: false,
   },
   {
+    path: "/contacts/create",
+    component: CreateContactComponent,
+    title: "Create Contacts",
+    needsAuth: true,
+  },
+  {
     path: "/",
     component: ContactsComponent,
     title: "Contacts",
     needsAuth: true,
-  },
-  {
-    path: "/contacts/create",
-    component: CreateContactComponent,
-    title: "Create Contacts",
-    needsAuth: false,
   },
 ];
 

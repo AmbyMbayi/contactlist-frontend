@@ -1,13 +1,14 @@
-import React from "react";
-import Header from "../../components/Header";
+import React, { useState } from "react";
+import CreateContact from "../../layout/Contacts/Create";
 
 const CreateContactContainer = () => {
-  return (
-    <div>
-      <Header />
-      <h1>Create Contact</h1>
-    </div>
-  );
+  const [form, setForm] = useState({});
+  const onChange = (e, { name, value }) => {
+    setForm({ ...form, [name]: value });
+  };
+
+  console.log("form", form);
+  return <CreateContact onChange={onChange} form={form} />;
 };
 
 export default CreateContactContainer;
