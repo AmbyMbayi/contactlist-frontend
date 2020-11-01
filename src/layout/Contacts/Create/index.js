@@ -10,10 +10,21 @@ import {
 } from "semantic-ui-react";
 import "./index.css";
 import countries from "../../../utils/countries";
+import { Prompt } from "react-router-dom";
 
-const CreateContact = ({ onChange }) => {
+const CreateContact = ({
+  onChange,
+  onSubmit,
+  formInvalid,
+  loading,
+  formIsHalfFilled,
+}) => {
   return (
     <div>
+      <Prompt
+        when={formIsHalfFilled}
+        message="You have unsaved changes, sure you want to leave?"
+      />
       <Header />
       <Grid centered>
         <Grid.Column className="form-column">
@@ -61,7 +72,13 @@ const CreateContact = ({ onChange }) => {
                     onChange(e, { name: "isFavorite", value: data.checked });
                   }}
                 />
-                <Button primary type="submit">
+                <Button
+                  primary
+                  type="submit"
+                  onClick={onSubmit}
+                  disabled={formInvalid || loading}
+                  loading={loading}
+                >
                   Submit
                 </Button>
               </Form>
