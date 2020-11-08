@@ -1,5 +1,11 @@
 import React from "react";
-import { Placeholder, List, Image, Container } from "semantic-ui-react";
+import {
+  Placeholder,
+  List,
+  Image,
+  Container,
+  Message,
+} from "semantic-ui-react";
 import contacts from "../../../context/reducers/contacts";
 import Header from "../../../components/Header";
 
@@ -31,8 +37,11 @@ const ContactsListUI = ({
           </>
         )}
 
+        {!loading && data.length === 0 && (
+          <Message content="No contacts to display" />
+        )}
         <List>
-          {data.length &&
+          {data.length > 0 &&
             data.map((contact) => (
               <List.Item key={contact.id}>
                 <List.Content floated="right">

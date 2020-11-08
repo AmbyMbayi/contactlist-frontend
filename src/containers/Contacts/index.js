@@ -12,8 +12,14 @@ const ContactsContainer = () => {
   const history = useHistory();
   console.log("contacts", contactsState);
 
+  const {
+    contacts: { data },
+  } = contactsState;
+
   useEffect(() => {
-    getContacts(history)(contactsDispatch);
+    if (data.length === 0) {
+      getContacts(history)(contactsDispatch);
+    }
   }, []);
 
   return <ContactsListUI state={contactsState} />;

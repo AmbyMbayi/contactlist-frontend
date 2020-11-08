@@ -51,15 +51,19 @@ const CreateContact = ({
                   type="file"
                   hidden
                 />
-                {tempFile && (
-                  <Image className="contact-picture" src={tempFile} />
-                )}
-                {!tempFile && (
-                  <div onClick={chooseImage} className="contact-picture">
-                    <span>choose picture</span>
-                  </div>
-                )}
-                <Icon name="pencil" onClick={chooseImage} />
+
+                <div className="image-wrapper">
+                  {tempFile && (
+                    <Image className="contact-picture" src={tempFile} />
+                  )}
+                  {!tempFile && (
+                    <div onClick={chooseImage} className="contact-picture">
+                      <span>choose picture</span>
+                    </div>
+                  )}
+                  <Icon name="pencil" onClick={chooseImage} />
+                </div>
+
                 <Form.Group widths={2}>
                   <Form.Input
                     label="First Name"
