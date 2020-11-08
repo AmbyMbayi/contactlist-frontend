@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Header from "../../../components/Header";
 import {
   Grid,
@@ -7,6 +7,8 @@ import {
   Form,
   Button,
   Select,
+  Icon,
+  Image,
 } from "semantic-ui-react";
 import "./index.css";
 import countries from "../../../utils/countries";
@@ -18,12 +20,23 @@ const CreateContact = ({
   formInvalid,
   loading,
   formIsHalfFilled,
+  onImageChange,
+  tempFile,
 }) => {
+  const imagePickRef = useRef(null);
+  const chooseImage = () => {
+    if (imagePickRef.current) {
+      imagePickRef.current.click();
+    }
+  };
   return (
     <div>
       <Prompt
         when={formIsHalfFilled}
-        message="You have unsaved changes, sure you want to leave?"
+        message={JSON.stringify({
+          header: "Confirm",
+          content: "You have unsaved changes, sure you want to leave?",
+        })}
       />
       <Header />
       <Grid centered>
@@ -32,9 +45,21 @@ const CreateContact = ({
           <Card fluid>
             <Card.Content>
               <Form unstackable>
-                <div className="contact-picture">
-                  <span>choose picture</span>
-                </div>
+                <input
+                  onChange={onImageChange}
+                  ref={imagePickRef}
+                  type="file"
+                  hidden
+                />
+                {tempFile && (
+                  <Image className="contact-picture" src={tempFile} />
+                )}
+                {!tempFile && (
+                  <div onClick={chooseImage} className="contact-picture">
+                    <span>choose picture</span>
+                  </div>
+                )}
+                <Icon name="pencil" onClick={chooseImage} />
                 <Form.Group widths={2}>
                   <Form.Input
                     label="First Name"

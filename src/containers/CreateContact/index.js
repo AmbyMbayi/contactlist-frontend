@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const CreateContactContainer = () => {
   const [form, setForm] = useState({});
+  const [tempFile, setTempFile] = useState(null);
   const history = useHistory();
 
   const {
@@ -15,6 +16,16 @@ const CreateContactContainer = () => {
       addContact: { loading, data, error },
     },
   } = useContext(GlobalContext);
+
+  const onImageChange = (e) => {
+    e.persist();
+    const fileURL = e.target.files[0];
+    setForm({ ...form, contactPicture: fileURL });
+
+    if (fileURL) {
+      setTempFile(URL.createObjectURL(fileURL));
+    }
+  };
 
   useEffect(() => {
     if (data) {
@@ -51,6 +62,8 @@ const CreateContactContainer = () => {
       formInvalid={formInvalid}
       loading={loading}
       formIsHalfFilled={formIsHalfFilled}
+      onImageChange={onImageChange}
+      tempFile={tempFile}
     />
   );
 };
