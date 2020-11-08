@@ -8,6 +8,7 @@ import {
 } from "semantic-ui-react";
 import contacts from "../../../context/reducers/contacts";
 import Header from "../../../components/Header";
+import ImageThumb from "../../../components/ImageThumb";
 
 const ContactsListUI = ({
   state: {
@@ -48,11 +49,11 @@ const ContactsListUI = ({
                   <span>{contact.phone_number}</span>
                 </List.Content>
                 <List.Content style={{ display: "flex", alignItems: "center" }}>
-                  <Image
-                    circular
-                    width={45}
-                    height={45}
+                  <ImageThumb
+                    firstName={contact.first_name}
+                    lastName={contact.last_name}
                     src={contact.contact_picture}
+                    style={{ width: 45, height: 45 }}
                   />
                   <span>
                     {contact.first_name} {contact.last_name}
