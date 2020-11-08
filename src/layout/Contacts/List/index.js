@@ -5,10 +5,12 @@ import {
   Image,
   Container,
   Message,
+  Header,
 } from "semantic-ui-react";
 import contacts from "../../../context/reducers/contacts";
-import Header from "../../../components/Header";
+import AppHeader from "../../../components/Header";
 import ImageThumb from "../../../components/ImageThumb";
+import Favorites from "../Favorites";
 
 const ContactsListUI = ({
   state: {
@@ -18,8 +20,14 @@ const ContactsListUI = ({
   console.log("data", data);
   return (
     <div>
-      <Header />
+      <AppHeader />
       <Container>
+        <Header>STARRED</Header>
+        <Favorites
+          favorites={data.filter((item) => item.is_favorite)}
+          loading={loading}
+        />
+        <Header>ALL</Header>
         {loading && (
           <>
             {" "}
@@ -37,7 +45,6 @@ const ContactsListUI = ({
             </Placeholder>
           </>
         )}
-
         {!loading && data.length === 0 && (
           <Message content="No contacts to display" />
         )}
