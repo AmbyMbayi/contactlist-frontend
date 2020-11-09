@@ -6,19 +6,25 @@ import getContacts from "../../context/actions/contacts/getContacts";
 import { useHistory } from "react-router-dom";
 import ContactsListUI from "../../layout/Contacts/List";
 import deleteContact from "../../context/actions/contacts/deleteContact";
+import starUnstar from "../../context/actions/contacts/starUnstar";
 
 const ContactsContainer = () => {
   const { contactsDispatch, contactsState } = useContext(GlobalContext);
 
   const history = useHistory();
-  console.log("contacts", contactsState);
 
   const {
     contacts: { data },
   } = contactsState;
+
   const handleDeleteContact = (id) => {
     deleteContact(id)(contactsDispatch);
   };
+
+  const handleStarUnstarContact = (id, is_favorite) => {
+    starUnstar(id, !is_favorite)(contactsDispatch);
+  };
+
   useEffect(() => {
     if (data.length === 0) {
       getContacts(history)(contactsDispatch);
@@ -26,7 +32,11 @@ const ContactsContainer = () => {
   }, []);
 
   return (
-    <ContactsListUI state={contactsState} deleteContact={handleDeleteContact} />
+    <ContactsListUI
+      state={contactsState}
+      deleteContact={handleDeleteContact}
+      starUnstarContact={handleStarUnstarContact}
+    />
   );
 };
 export default ContactsContainer;

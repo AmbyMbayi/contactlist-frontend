@@ -10,6 +10,7 @@ import {
   SEARCH_CONTACTS,
   DELETE_CONTACT_SUCCESS,
   DELETE_CONTACT_LOADING,
+  ADD_REMOVE_STAR_SUCCESS,
 } from "../../constants/actionTypes";
 
 import contactsInitialState from "../initialstates/contactsInitialState";
@@ -99,6 +100,20 @@ const contacts = (state, { payload, type }) => {
           ...state.contacts,
           loading: false,
           data: state.contacts.data.filter((item) => item.id !== payload),
+        },
+      };
+
+    case ADD_REMOVE_STAR_SUCCESS:
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          data: state.contacts.data.map((item) => {
+            if (item.id === payload.id) {
+              return payload;
+            }
+            return item;
+          }),
         },
       };
     case CLEAR_ADD_CONTACT:
