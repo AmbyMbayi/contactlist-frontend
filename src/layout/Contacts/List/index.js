@@ -6,6 +6,8 @@ import {
   Container,
   Message,
   Header,
+  Button,
+  Icon,
 } from "semantic-ui-react";
 import contacts from "../../../context/reducers/contacts";
 import AppHeader from "../../../components/Header";
@@ -13,6 +15,7 @@ import ImageThumb from "../../../components/ImageThumb";
 import Favorites from "../Favorites";
 
 const ContactsListUI = ({
+  deleteContact,
   state: {
     contacts: { loading, error, isSearchActive, foundContacts, data },
   },
@@ -53,9 +56,18 @@ const ContactsListUI = ({
         <List>
           {currentContacts.length > 0 &&
             currentContacts.map((contact) => (
-              <List.Item key={contact.id}>
+              <List.Item key={contact.id} disabled={contact.deleting}>
                 <List.Content floated="right">
-                  <span>{contact.phone_number}</span>
+                  <span>{contact.phone_number}</span>{" "}
+                  <Button
+                    color="red"
+                    size="tiny"
+                    onClick={() => {
+                      deleteContact(contact.id);
+                    }}
+                  >
+                    <Icon name="delete" />
+                  </Button>
                 </List.Content>
                 <List.Content style={{ display: "flex", alignItems: "center" }}>
                   <ImageThumb

@@ -8,6 +8,8 @@ import {
   ADD_CONTACT_ERROR,
   CLEAR_ADD_CONTACT,
   SEARCH_CONTACTS,
+  DELETE_CONTACT_SUCCESS,
+  DELETE_CONTACT_LOADING,
 } from "../../constants/actionTypes";
 
 import contactsInitialState from "../initialstates/contactsInitialState";
@@ -74,6 +76,29 @@ const contacts = (state, { payload, type }) => {
         addContact: {
           ...state.addContact,
           loading: false,
+        },
+      };
+    case DELETE_CONTACT_LOADING:
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          loading: false,
+          data: state.contacts.data.map((item) => {
+            if (item.id === payload) {
+              return { ...item, deleting: true };
+            }
+            return item;
+          }),
+        },
+      };
+    case DELETE_CONTACT_SUCCESS:
+      return {
+        ...state,
+        contacts: {
+          ...state.contacts,
+          loading: false,
+          data: state.contacts.data.filter((item) => item.id !== payload),
         },
       };
     case CLEAR_ADD_CONTACT:
