@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Placeholder, Icon } from "semantic-ui-react";
+import { Placeholder, Icon, Message } from "semantic-ui-react";
 import ImageThumb from "../../../components/ImageThumb";
 import "./style.css";
 const Favorites = ({ favorites, loading }) => {
@@ -27,55 +27,60 @@ const Favorites = ({ favorites, loading }) => {
     }
   };
   return (
-    <div className="slide-container">
-      {showIcons && (
-        <Icon
-          name="caret left"
-          size="huge"
-          className="icon-class"
-          onClick={scrollLeft}
-        ></Icon>
+    <>
+      {!loading && favorites.length === 0 && (
+        <Message content="No contacts to display" />
       )}
-      {favorites.length > 0 && (
-        <div className="items-container" ref={listRef}>
-          {Array.isArray(favorites) &&
-            favorites.map((item, i) => (
-              <div key={item.id} className="single-item-container">
-                <ImageThumb
-                  firstName={item.first_name}
-                  lastName={item.last_name}
-                  src={item.contact_picture}
-                  style={{ width: 45, height: 45 }}
-                />
-                <p className="name">
-                  {item.first_name}
-                  {item.last_name}
-                </p>
-              </div>
-            ))}
-        </div>
-      )}
+      <div className="slide-container">
+        {showIcons && (
+          <Icon
+            name="caret left"
+            size="huge"
+            className="icon-class"
+            onClick={scrollLeft}
+          ></Icon>
+        )}
+        {favorites.length > 0 && (
+          <div className="items-container" ref={listRef}>
+            {Array.isArray(favorites) &&
+              favorites.map((item, i) => (
+                <div key={item.id} className="single-item-container">
+                  <ImageThumb
+                    firstName={item.first_name}
+                    lastName={item.last_name}
+                    src={item.contact_picture}
+                    style={{ width: 45, height: 45 }}
+                  />
+                  <p className="name">
+                    {item.first_name}
+                    {item.last_name}
+                  </p>
+                </div>
+              ))}
+          </div>
+        )}
 
-      {loading && (
-        <>
-          {" "}
-          <Placeholder>
-            <Placeholder.Header image>
-              <Placeholder.Line />
-              <Placeholder.Line />
-            </Placeholder.Header>
-          </Placeholder>
-        </>
-      )}
-      {showIcons && (
-        <Icon
-          name="caret right"
-          size="huge"
-          className="icon-class"
-          onClick={scrollRight}
-        ></Icon>
-      )}
-    </div>
+        {loading && (
+          <>
+            {" "}
+            <Placeholder>
+              <Placeholder.Header image>
+                <Placeholder.Line />
+                <Placeholder.Line />
+              </Placeholder.Header>
+            </Placeholder>
+          </>
+        )}
+        {showIcons && (
+          <Icon
+            name="caret right"
+            size="huge"
+            className="icon-class"
+            onClick={scrollRight}
+          ></Icon>
+        )}
+      </div>
+    </>
   );
 };
 

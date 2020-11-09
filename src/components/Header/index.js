@@ -27,9 +27,15 @@ const Header = () => {
           My-Contacts
         </Menu.Item>
 
-        <Menu.Item>
-          <Input placeholder="search contacts" onChange={onChange} />
-        </Menu.Item>
+        {isAuthenticated() && (
+          <Menu.Item position="right">
+            <Input
+              placeholder="search contacts"
+              style={{ width: 400 }}
+              onChange={onChange}
+            />
+          </Menu.Item>
+        )}
 
         {pathname == "/" && (
           <Menu.Item position="right">
