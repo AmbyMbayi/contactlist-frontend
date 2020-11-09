@@ -2,14 +2,13 @@ import React from "react";
 import {
   Placeholder,
   List,
-  Image,
   Container,
   Message,
   Header,
   Button,
   Icon,
 } from "semantic-ui-react";
-import contacts from "../../../context/reducers/contacts";
+
 import AppHeader from "../../../components/Header";
 import ImageThumb from "../../../components/ImageThumb";
 import Favorites from "../Favorites";

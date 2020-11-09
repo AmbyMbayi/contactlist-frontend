@@ -15,7 +15,9 @@ import userLeaveConfirmation from "./components/userLeaveConfirmation";
 
 const RenderRoute = (route) => {
   const history = useHistory();
+
   document.title = route.title || "Contact App";
+
   if (route.needsAuth && !isAuthenticated()) {
     history.push("/auth/login");
   }
@@ -27,6 +29,7 @@ const RenderRoute = (route) => {
     ></Route>
   );
 };
+
 function App() {
   const [confirmOpen, setConfirmOpen] = useState(true);
   return (

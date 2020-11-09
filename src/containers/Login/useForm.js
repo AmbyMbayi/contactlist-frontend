@@ -15,9 +15,6 @@ export default () => {
     },
   } = useContext(GlobalContext);
 
-  console.log("error", error);
-  console.log("data", data);
-
   const onChange = (e, { name, value }) => {
     setForm({ ...form, [name]: value });
   };

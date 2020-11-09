@@ -54,12 +54,13 @@ const contacts = (state, { payload, type }) => {
         ...state,
         addContact: {
           ...state.addContact,
-          loading: true,
           error: null,
+          loading: true,
         },
       };
     case ADD_CONTACT_SUCCESS:
       return {
+        ...state,
         addContact: {
           ...state.addContact,
           loading: false,
@@ -74,6 +75,7 @@ const contacts = (state, { payload, type }) => {
 
     case ADD_CONTACT_ERROR:
       return {
+        ...state,
         addContact: {
           ...state.addContact,
           loading: false,
@@ -130,6 +132,7 @@ const contacts = (state, { payload, type }) => {
     case SEARCH_CONTACTS:
       const searchValue = payload?.toLowerCase();
       return {
+        ...state,
         contacts: {
           ...state.contacts,
           loading: false,

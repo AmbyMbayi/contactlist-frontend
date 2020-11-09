@@ -43,7 +43,7 @@ const Favorites = ({ favorites, loading }) => {
         {favorites.length > 0 && (
           <div className="items-container" ref={listRef}>
             {Array.isArray(favorites) &&
-              favorites.map((item, i) => (
+              favorites.map((item) => (
                 <div key={item.id} className="single-item-container">
                   <ImageThumb
                     firstName={item.first_name}

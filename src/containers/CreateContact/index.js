@@ -44,7 +44,6 @@ const CreateContactContainer = () => {
     setForm({ ...form, [name]: value });
   };
 
-  console.log("form", form);
   const onSubmit = () => {
     createContact(form)(contactsDispatch);
   };

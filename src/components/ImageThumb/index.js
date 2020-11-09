@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from "semantic-ui-react";
-import contacts from "../../context/reducers/contacts";
 import "./style.css";
 
 const ImageThumb = ({ firstName, lastName, src, className, style }) => {

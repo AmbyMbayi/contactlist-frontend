@@ -37,7 +37,7 @@ const Header = () => {
           </Menu.Item>
         )}
 
-        {pathname == "/" && (
+        {isAuthenticated() && (
           <Menu.Item position="right">
             <Button as={Link} to="/contacts/create" primary basic icon>
               <Icon name="add"></Icon>

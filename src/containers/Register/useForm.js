@@ -16,9 +16,6 @@ export default () => {
     },
   } = useContext(GlobalContext);
 
-  console.log("error", error);
-  console.log("data", data);
-
   useEffect(() => {
     if (error) {
       for (const item in error) {
