@@ -3,6 +3,8 @@ export default {
     loading: false,
     error: null,
     data: [],
+    isSearchActivce: false,
+    foundContacts: [],
   },
   addContact: {
     loading: false,

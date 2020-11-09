@@ -7,6 +7,7 @@ import {
   ADD_CONTACT_SUCCESS,
   ADD_CONTACT_ERROR,
   CLEAR_ADD_CONTACT,
+  SEARCH_CONTACTS,
 } from "../../constants/actionTypes";
 
 import contactsInitialState from "../initialstates/contactsInitialState";
@@ -83,6 +84,23 @@ const contacts = (state, { payload, type }) => {
           error: null,
           loading: false,
           data: null,
+        },
+      };
+
+    case SEARCH_CONTACTS:
+      const searchValue = payload?.toLowerCase();
+      return {
+        contacts: {
+          ...state.contacts,
+          loading: false,
+          isSearchActive: !!payload.length > 0 || false,
+          foundContacts: state.contacts.data.filter((item) => {
+            return (
+              item.first_name.toLowerCase().search(searchValue) !== -1 ||
+              item.last_name.toLowerCase().search(searchValue) !== -1 ||
+              item.phone_number.toLowerCase().search(searchValue) !== -1
+            );
+          }),
         },
       };
 

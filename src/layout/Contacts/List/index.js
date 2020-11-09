@@ -14,17 +14,19 @@ import Favorites from "../Favorites";
 
 const ContactsListUI = ({
   state: {
-    contacts: { loading, error, data },
+    contacts: { loading, error, isSearchActive, foundContacts, data },
   },
 }) => {
   console.log("data", data);
+
+  const currentContacts = isSearchActive ? foundContacts : data;
   return (
     <div>
       <AppHeader />
       <Container>
         <Header>STARRED</Header>
         <Favorites
-          favorites={data.filter((item) => item.is_favorite)}
+          favorites={currentContacts.filter((item) => item.is_favorite)}
           loading={loading}
         />
         <Header>ALL</Header>
@@ -45,12 +47,12 @@ const ContactsListUI = ({
             </Placeholder>
           </>
         )}
-        {!loading && data.length === 0 && (
+        {!loading && currentContacts.length === 0 && (
           <Message content="No contacts to display" />
         )}
         <List>
-          {data.length > 0 &&
-            data.map((contact) => (
+          {currentContacts.length > 0 &&
+            currentContacts.map((contact) => (
               <List.Item key={contact.id}>
                 <List.Content floated="right">
                   <span>{contact.phone_number}</span>
